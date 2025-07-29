@@ -4,11 +4,12 @@ import { writeFile } from 'fs/promises';
 import BlogModel from '@/lib/models/BlogModel';
 import cloudinary from '@/lib/config/cloudinary';
 
-await connectDB();
+
 
 import type { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
+  await connectDB();
   console.log('Fetching blogs...');
   const blogId = request.nextUrl.searchParams.get('id');
   if (blogId) {
@@ -55,6 +56,7 @@ export async function POST(request: NextRequest) {
   //   message: 'Blog created successfully',
   //   blog: blogData,
   // });
+  await connectDB();
 
   const formdata = await request.formData();
   const timeStamp = Date.now();
