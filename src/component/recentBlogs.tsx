@@ -19,7 +19,7 @@ export default function recentBlogs() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/blog');
+      const response = await axios.get('/api/blog');
       if (response.status === 200) {
         setBlogs(response.data.blogs);
         console.log('Blogs fetched successfully:', response.data.blogs);
