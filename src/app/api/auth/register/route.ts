@@ -2,7 +2,9 @@ import connectDB from '@/lib/config/db';
 import User from '@/lib/models/UserModel.js';
 import bcrypt from 'bcryptjs';
 
-export async function POST(req) {
+import type { NextRequest } from 'next/server';
+
+export async function POST(req: NextRequest) {
   await connectDB();
   const { name, email, password } = await req.json();
   const existingUser = await User.findOne({ email });

@@ -3,7 +3,8 @@ import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const token = cookies().get('token')?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get('token')?.value;
   const secret = process.env.JWT_SECRET || process.env.NEXT_PUBLIC_JWT_SECRET;
 
   if (!token || !secret) {
@@ -12,7 +13,17 @@ export async function GET() {
 
   try {
     const user = jwt.verify(token, secret);
-    return NextResponse.json({ name: user.name, email: user.email });
+    if (typeof user === 'object' && user !== null) {
+      return NextResponse.json({
+        name: (user as jwt.JwtPayload).name,
+        email: (user as jwt.JwtPayload).email,
+      });
+    } else {
+      return NextResponse.json(
+        { error: 'Invalid token payload' },
+        { status: 401 },
+      );
+    }
   } catch (error) {
     return NextResponse.json({ error: 'Invalid token' }, { status: 401 });
   }

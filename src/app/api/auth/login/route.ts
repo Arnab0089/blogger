@@ -3,7 +3,9 @@ import User from '@/lib/models/UserModel';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-export async function POST(req) {
+import type { NextRequest } from 'next/server';
+
+export async function POST(req: NextRequest) {
   await connectDB();
   const { email, password } = await req.json();
 
@@ -13,9 +15,13 @@ export async function POST(req) {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return new Response('Invalid credentials', { status: 401 });
 
+  const jwtSecret = process.env.NEXT_PUBLIC_JWT_SECRET;
+  if (!jwtSecret) {
+    return new Response('JWT secret not configured', { status: 500 });
+  }
   const token = jwt.sign(
     { id: user._id, name: user.name, email: user.email },
-    process.env.NEXT_PUBLIC_JWT_SECRET,
+    jwtSecret,
     {
       expiresIn: '1d',
     },

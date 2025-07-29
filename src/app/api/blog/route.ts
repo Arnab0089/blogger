@@ -6,7 +6,9 @@ import cloudinary from '@/lib/config/cloudinary';
 
 await connectDB();
 
-export async function GET(request) {
+import type { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
   console.log('Fetching blogs...');
   const blogId = request.nextUrl.searchParams.get('id');
   if (blogId) {
@@ -25,7 +27,7 @@ export async function GET(request) {
   }
 }
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   // const formdata = await request.formData();
   // const timeStamp = Date.now();
 
@@ -59,6 +61,24 @@ export async function POST(request) {
 
   // Handle Blog Image
   const image = formdata.get('image');
+  if (!image) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Blog image is required',
+      },
+      { status: 400 },
+    );
+  }
+  if (!(image instanceof File)) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: 'Blog image must be a file',
+      },
+      { status: 400 },
+    );
+  }
   const imageByteData = await image.arrayBuffer();
   const imageBuffer = Buffer.from(imageByteData);
   const imageBase64 = `data:${image.type};base64,${imageBuffer.toString(
@@ -89,7 +109,8 @@ export async function POST(request) {
   } else {
     // fallback default
     authorImgUrl =
-      formdata.get('defaultAuthorImage') || '/Assets/profile_icon.png';
+      (formdata.get('defaultAuthorImage') as string) ||
+      '/Assets/profile_icon.png';
   }
 
   const blogData = {
