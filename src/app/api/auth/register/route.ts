@@ -1,5 +1,5 @@
 import connectDB from '@/lib/config/db';
-import User from '@/lib/models/UserModel.js';
+import User from '@/lib/models/UserModel';
 import bcrypt from 'bcryptjs';
 
 import type { NextRequest } from 'next/server';
