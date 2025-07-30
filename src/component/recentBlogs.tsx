@@ -2,6 +2,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import BlogItem from '@/component/blogitem';
+import LoadingSpinner from './Utitlity/LoadingSpinner';
 
 type Blog = {
   _id: string;
@@ -16,6 +17,7 @@ type Blog = {
 
 export default function recentBlogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchBlogs = async () => {
     try {
@@ -23,9 +25,11 @@ export default function recentBlogs() {
       if (response.status === 200) {
         setBlogs(response.data.blogs);
         console.log('Blogs fetched successfully:', response.data.blogs);
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error fetching blogs:', error);
+      setLoading(false);
     }
   };
 
@@ -49,29 +53,33 @@ export default function recentBlogs() {
           >
             Recent Blogs
           </h1>
-          <div className="flex flex-wrap justify-center gap-12 mt-6">
-            {blogs.slice(-3).map((blog, index) => {
-              const tiltClass =
-                index % 2 === 0
-                  ? 'rotate-[-2deg] hover:scale-105 hover:rotate-[0deg]'
-                  : 'rotate-[2deg] hover:scale-105 hover:rotate-[0deg]';
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <div className="flex flex-wrap justify-center gap-12 mt-6">
+              {blogs.slice(-3).map((blog, index) => {
+                const tiltClass =
+                  index % 2 === 0
+                    ? 'rotate-[-2deg] hover:scale-105 hover:rotate-[0deg]'
+                    : 'rotate-[2deg] hover:scale-105 hover:rotate-[0deg]';
 
-              return (
-                <div
-                  key={blog._id}
-                  className={`${tiltClass} transition-transform duration-300`}
-                >
-                  <BlogItem
-                    id={blog._id}
-                    title={blog.title}
-                    description={blog.description}
-                    image={blog.image}
-                    category={blog.category}
-                  />
-                </div>
-              );
-            })}
-          </div>
+                return (
+                  <div
+                    key={blog._id}
+                    className={`${tiltClass} transition-transform duration-300`}
+                  >
+                    <BlogItem
+                      id={blog._id}
+                      title={blog.title}
+                      description={blog.description}
+                      image={blog.image}
+                      category={blog.category}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
         <div className=" w-full lg:w-[30%] h-full lg:h-[500px] p-4 rounded-lg  ">
           <h1

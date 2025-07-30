@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import BlogItem from './blogitem';
 import { GrLinkPrevious, GrLinkNext } from 'react-icons/gr';
 import BlogNotFound from '@/component/Home/BlogCategoryNotFound/blogNotFound';
+import LoadingSpinner from './Utitlity/LoadingSpinner';
 
 export default function Bloglist() {
   const [menu, setMenu] = useState('All');
@@ -12,6 +13,7 @@ export default function Bloglist() {
   const [authors, setAuthors] = useState([]);
   const [selectedAuthor, setSelectedAuthor] = useState('All');
   const [showCategoryBox, setShowCategoryBox] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const [categories, setCategories] = useState([
     'All',
@@ -25,6 +27,7 @@ export default function Bloglist() {
     try {
       const response = await fetch('/api/blog');
       if (response.status !== 200) throw new Error('Failed to fetch blogs');
+      setLoading(false);
 
       const data = await response.json();
       setBlogs(data.blogs);
@@ -166,35 +169,39 @@ export default function Bloglist() {
       </div>
 
       {/* Blog List */}
-      <div className="flex flex-wrap justify-center sm:justify-start gap-12 mx-4 sm:mx-10 lg:mx-24 my-12">
-        {visibleBlogs.length > 0 ? (
-          visibleBlogs.map((blog, index) => {
-            const tiltClass =
-              index % 2 === 0
-                ? 'rotate-[-2deg] hover:rotate-[0deg] hover:scale-105'
-                : 'rotate-[2deg] hover:rotate-[0deg] hover:scale-105';
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div className="flex flex-wrap justify-center sm:justify-start gap-12 mx-4 sm:mx-10 lg:mx-24 my-12">
+          {visibleBlogs.length > 0 ? (
+            visibleBlogs.map((blog, index) => {
+              const tiltClass =
+                index % 2 === 0
+                  ? 'rotate-[-2deg] hover:rotate-[0deg] hover:scale-105'
+                  : 'rotate-[2deg] hover:rotate-[0deg] hover:scale-105';
 
-            return (
-              <div
-                key={blog._id}
-                className={`${tiltClass} transition-transform duration-300`}
-              >
-                <BlogItem
-                  id={blog._id}
-                  title={blog.title}
-                  description={blog.description}
-                  image={blog.image}
-                  category={blog.category}
-                />
-              </div>
-            );
-          })
-        ) : (
-          <div className="w-full text-center text-gray-500">
-            <BlogNotFound />
-          </div>
-        )}
-      </div>
+              return (
+                <div
+                  key={blog._id}
+                  className={`${tiltClass} transition-transform duration-300`}
+                >
+                  <BlogItem
+                    id={blog._id}
+                    title={blog.title}
+                    description={blog.description}
+                    image={blog.image}
+                    category={blog.category}
+                  />
+                </div>
+              );
+            })
+          ) : (
+            <div className="w-full text-center text-gray-500">
+              <BlogNotFound />
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Pagination */}
       {filteredBlogs.length > 0 && (
