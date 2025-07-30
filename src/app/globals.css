@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
 @import 'tailwindcss';
 
 /* body {
@@ -51,9 +52,78 @@
   box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
+.tag-banner-box {
+  position: relative;
+  width: 12rem;
+  height: 3.5rem;
+  border-radius: 50px;
+  background: linear-gradient(
+    to right,
+    #656565,
+    #7f42a7,
+    #6600c5,
+    #5300a0,
+    #757575,
+    #656565
+  );
+  background-size: 200%;
+  animation: animategradient 3.5s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+.tag-image-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(
+    to right,
+    #656565,
+    #7f42a7,
+    #6600c5,
+    #5300a0,
+    #757575,
+    #656565
+  );
+  background-size: 200%;
+  animation: animategradient 3.5s ease-in-out infinite;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+.tag-banner {
+  position: absolute;
+  inset: 3px 3px 3px 3px;
+  background-color: black;
+  color: white;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+}
+
 @keyframes animategradient {
   to {
     background-position: 500%;
+  }
+}
+
+.banner {
+  background-image: url('../../public/assest2/banner1.png');
+  width: 100%;
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 1200px) {
+  .banner {
+    background-image: url('../../public/assest2/banner1.png');
+    width: 100vw;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 }
 
@@ -119,4 +189,143 @@
   --color-font-primary: #ee6c4d;
   --color-font-secondary: #293241;
   --font-family-primary: 'Playwrite AU QLD', sans-serif;
+}
+
+.prose h1 {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  padding-bottom: 10px;
+  font-size: 2rem;
+  color: #1f2937; /* Tailwind's gray-800 */
+}
+
+.prose h2 {
+  font-family: 'Merriweather', serif;
+  font-weight: 600;
+  font-size: 1.75rem;
+  padding-bottom: 8px;
+  color: #1f2937; /* Tailwind's gray-800 */
+}
+
+.prose h3 {
+  font-family: 'Merriweather', serif;
+  font-weight: 500;
+  padding-bottom: 6px;
+  font-size: 1.5rem;
+  color: #1f2937; /* Tailwind's gray-800 */
+}
+
+.prose strong {
+  color: var(--color-bg-secondary);
+}
+
+.prose p {
+  padding: 0.2rem;
+  line-height: 1.75;
+  color: #374151; /* Tailwind's gray-700 */
+}
+
+.prose ol {
+  padding-left: 1.5rem;
+  color: #374151;
+  margin-bottom: 5px;
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+.prose ul {
+  padding-left: 1.5rem;
+  color: #374151;
+  margin-bottom: 5px;
+}
+
+.prose pre {
+  @apply bg-gray-100 dark:bg-gray-800 p-4 rounded-md overflow-x-auto text-sm;
+}
+
+.prose code {
+  @apply text-pink-600 dark:text-pink-400 bg-gray-100 dark:bg-gray-800 px-1 rounded;
+}
+
+/* Optional cleanup for Quill artifacts */
+.ql-ui {
+  display: none;
+}
+.ql-code-block-container {
+  @apply my-4;
+}
+
+.ql-code-block-container {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  overflow: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.ql-code-block-container ::-webkit-scrollbar {
+  display: none;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-gray-300 pl-4 italic text-white bg-black my-4;
+  font-family: 'Merriweather', serif;
+  font-size: 1.25rem; /* Tailwind's gray-700 */
+}
+
+.swiper-pagination {
+  margin-top: 1.5rem;
+  position: static !important;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .swiper-pagination {
+    margin-top: 1rem;
+  }
+  .swiper-navigation {
+    display: none;
+  }
+}
+
+/* Always style Swiper nav arrows */
+/* Stronger selector with !important overrides */
+.swiper-button-next,
+.swiper-button-prev {
+  font-weight: bold !important;
+  font-size: 10px !important;
+  transition: opacity 0.3s ease !important;
+  z-index: 10 !important;
+  background-color: var(--color-font-secondary) !important;
+  color: var(--color-bg-primary) !important;
+  width: 60px !important;
+  height: 60px !important;
+  padding: 2px !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-button-next {
+  position: absolute;
+  right: -10% !important;
+}
+
+/* Force hide on small screens */
+@media (max-width: 768px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+
+/* Positioning */
+.swiper-button-next {
+  right: -10px !important;
+}
+
+.swiper-button-prev {
+  left: -10px !important;
 }

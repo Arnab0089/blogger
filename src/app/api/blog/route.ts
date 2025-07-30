@@ -4,14 +4,21 @@ import { writeFile } from 'fs/promises';
 import BlogModel from '@/lib/models/BlogModel';
 import cloudinary from '@/lib/config/cloudinary';
 
-
-
 import type { NextRequest } from 'next/server';
 
 export async function GET(request: NextRequest) {
   await connectDB();
   console.log('Fetching blogs...');
   const blogId = request.nextUrl.searchParams.get('id');
+  const author = request.nextUrl.searchParams.get('author');
+  if (author) {
+    console.log(`Fetching blogs for author: ${author}`);
+    const blogs = await BlogModel.find({ author });
+    return NextResponse.json({
+      success: true,
+      blogs,
+    });
+  }
   if (blogId) {
     console.log(`Fetching blog with ID: ${blogId}`);
     const blog = await BlogModel.findById(blogId);
