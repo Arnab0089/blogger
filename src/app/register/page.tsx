@@ -58,7 +58,7 @@ export default function RegisterPage() {
       />
       <form
         onSubmit={handleRegister}
-        className="bg-white p-8 rounded  w-full max-w-md z-12 bg-gradient-to-b from-rose-500 to-blue-300 backdrop-blur-md shadow-2xl"
+        className="bg-white p-8 rounded mx-6  w-full max-w-md z-12 bg-gradient-to-b from-rose-500 to-blue-300 backdrop-blur-md shadow-2xl"
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-blue-800 font-family-primary">
           Register

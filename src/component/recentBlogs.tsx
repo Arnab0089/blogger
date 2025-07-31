@@ -66,8 +66,8 @@ export default function recentBlogs() {
               {blogs.slice(-3).map((blog, index) => {
                 const tiltClass =
                   index % 2 === 0
-                    ? 'rotate-[-2deg] hover:scale-105 hover:rotate-[0deg]'
-                    : 'rotate-[2deg] hover:scale-105 hover:rotate-[0deg]';
+                    ? 'sm:rotate-[-2deg] hover:scale-105 hover:rotate-[0deg]'
+                    : 'sm:rotate-[2deg] hover:scale-105 hover:rotate-[0deg]';
 
                 return (
                   <motion.div
