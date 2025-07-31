@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import BlogItem from '@/component/blogitem';
 import LoadingSpinner from './Utitlity/LoadingSpinner';
+import { motion } from 'motion/react';
 
 type Blog = {
   _id: string;
@@ -42,14 +43,19 @@ export default function recentBlogs() {
     fetchBlogs();
   }, []);
   return (
-    <div className="container  sm:mx-auto sm:p-4 m-2">
+    <motion.div
+      className="container  sm:mx-auto sm:p-4 m-2"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex flex-col lg:flex-row  items-center justify-between mb-4">
         <div className="w-full h-full">
           <h1
             className="text-4xl font-extrabold 
                    bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 
                    bg-clip-text text-transparent 
-                   animate-gradient-x transition-all duration-1000 font-family-primary pb-4"
+                   animate-gradient-x transition-all duration-1000  pb-4"
           >
             Recent Blogs
           </h1>
@@ -64,9 +70,13 @@ export default function recentBlogs() {
                     : 'rotate-[2deg] hover:scale-105 hover:rotate-[0deg]';
 
                 return (
-                  <div
+                  <motion.div
                     key={blog._id}
                     className={`${tiltClass} transition-transform duration-300`}
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, y: 100 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <BlogItem
                       id={blog._id}
@@ -75,7 +85,7 @@ export default function recentBlogs() {
                       image={blog.image}
                       category={blog.category}
                     />
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -108,6 +118,6 @@ export default function recentBlogs() {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -5,11 +5,10 @@ import Image from 'next/image';
 import arrow from '@/Assets/arrow.png';
 import Link from 'next/link';
 import axios from 'axios';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import DOMPurify from 'isomorphic-dompurify';
 import Footer from '@/component/Footer/footer';
 import AdminBlogs from '@/component/AdminComponent/AdminBlogs/AdminBlogs';
-import GetStarted from '@/component/Home/GetStarted/getstarted';
 
 export default function BlogPage({
   params,
@@ -75,7 +74,7 @@ export default function BlogPage({
   return (
     <>
       {/* Header Section */}
-      <div className="banner  px-5 md:px-12 lg:px-28 pt-6 pb-24 shadow-sm">
+      <motion.div className="banner  px-5 md:px-12 lg:px-28 pt-6 pb-24 shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
           <Link href="/">
             <div className="tag-banner-box">
@@ -112,7 +111,7 @@ export default function BlogPage({
             </h1>
           </div>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Main Blog Content */}
       <div className="flex flex-col justify-center items-center ">

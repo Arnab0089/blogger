@@ -1,16 +1,23 @@
-import React from 'react';
-import { cookies } from 'next/headers';
+'use client';
+
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 
-export default async function getstarted() {
-  const cookieStore = cookies();
-  const token = (await cookieStore).get('token')?.value;
+export default function GetStarted() {
+  const [linkHref, setLinkHref] = useState('/login');
 
-  const linkHref = token ? '/admin' : '/login';
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      setLinkHref('/admin');
+    }
+  }, []);
+
   return (
     <div>
       <Link href={linkHref}>
-        <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer ">
+        <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer">
           Get Started
         </button>
       </Link>
