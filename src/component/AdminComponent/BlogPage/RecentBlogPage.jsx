@@ -11,10 +11,8 @@ import Link from 'next/link';
 export default function RecentBlogPage({ blogId }) {
   const [cleanedHTML, setCleanedHTML] = useState('');
 
-  const token = localStorage.getItem('token');
-  const linkHref = token ? '/admin' : '/login';
-
   const [data, setData] = useState({});
+  const [link, setLink] = useState('');
 
   const fetchData = async () => {
     try {
@@ -32,6 +30,9 @@ export default function RecentBlogPage({ blogId }) {
 
   useEffect(() => {
     fetchData();
+    const token = window.localStorage.getItem('token');
+    const linkHref = token ? '/admin' : '/login';
+    setLink(linkHref);
   }, []);
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export default function RecentBlogPage({ blogId }) {
             </div>
           </Link>
           <button className="flex items-center gap-2 border text-font-secondary border-gray-300 rounded-lg px-5 py-2 bg-white  hover:bg-gray-100 hover:text-bg-secondary transition duration-300 cursor-pointer shadow-[-7px_7px_0px] font-family-primary font-semibold">
-            <Link href={linkHref}>
+            <Link href={link}>
               <span className="text-black capitalize hover:text-font-primary">
                 Create your Own
               </span>
