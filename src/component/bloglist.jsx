@@ -124,7 +124,7 @@ export default function Bloglist() {
       </div> */}
 
       {/* Custom Dropdown Button */}
-      <div className="relative flex justify-center my-8">
+      <div className="relative flex justify-center py-8">
         {/* Blur Overlay */}
         {showCategoryBox && (
           <div
@@ -136,9 +136,9 @@ export default function Bloglist() {
         {/* Category Button */}
         <button
           onClick={toggleCategoryBox}
-          className="px-4 py-2 bg-black text-white rounded shadow hover:bg-gray-800 transition relative z-20"
+          className="px-4 py-2 bg-bg-secondary text-black font-extrabold font-family-secondary rounded shadow hover:bg-font-secondary hover:text-bg-light-primary transition relative z-20"
         >
-          {menu === 'All' ? 'Select Category' : menu}
+          {menu === 'All' ? 'All Categories' : menu}
         </button>
 
         {/* Dropdown Box */}
@@ -148,7 +148,7 @@ export default function Bloglist() {
               <div
                 key={category}
                 onClick={() => handleCategorySelect(category)}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer transition bg-bg-light-primary font-family-primary text-font-primary rounded-sm m-2 font-semibold"
+                className="px-4 py-2 hover:bg-bg-secondary hover:text-bg-light-primary cursor-pointer transition bg-bg-light-primary font-family-secondary text-font-primary rounded-sm m-2 font-semibold"
               >
                 {category}
               </div>
@@ -164,7 +164,7 @@ export default function Bloglist() {
           placeholder="Search by title..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-[80%] sm:w-[60%] md:w-[40%] px-4 py-2 border border-gray-300 bg-bg-light-primary font-family-primary rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
+          className="w-[80%] sm:w-[60%] md:w-[40%] px-4 py-2 border border-gray-300 bg-bg-secondary font-family-secondary rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-black"
         />
       </div>
 
@@ -172,18 +172,19 @@ export default function Bloglist() {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div className="flex flex-wrap justify-center sm:justify-start gap-12 mx-4 sm:mx-10 lg:mx-24 my-12">
+        <div className="flex flex-wrap justify-center sm:justify-start gap-12 mx-4 sm:mx-10 lg:mx-24 my-12 group">
           {visibleBlogs.length > 0 ? (
             visibleBlogs.map((blog, index) => {
               const tiltClass =
                 index % 2 === 0
-                  ? 'rotate-[-2deg] hover:rotate-[0deg] hover:scale-105'
-                  : 'rotate-[2deg] hover:rotate-[0deg] hover:scale-105';
+                  ? 'rotate-[-2deg] group-hover:rotate-[0deg] group-hover:scale-105'
+                  : 'rotate-[2deg] group-hover:rotate-[0deg] group-hover:scale-105';
 
               return (
                 <div
                   key={blog._id}
-                  className={`${tiltClass} transition-transform duration-300`}
+                  className={`transition-transform duration-300 ${tiltClass} group-hover:wave-animate`}
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <BlogItem
                     id={blog._id}
@@ -208,8 +209,8 @@ export default function Bloglist() {
         <div className="flex gap-4 justify-center my-8 w-full h-[50px]">
           <button
             onClick={() => page > 1 && setPage(page - 1)}
-            disabled={page === 1}
-            className="py-1 px-4 rounded-sm transition-all duration-300 bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            hidden={page === 1}
+            className="py-1 px-4 rounded-sm transition-all duration-300 bg-gray-200 text-black hover:bg-gray-300 hidden:opacity-50 disabled:cursor-not-allowed"
           >
             <GrLinkPrevious />
           </button>
@@ -219,11 +220,11 @@ export default function Bloglist() {
               key={index}
               onClick={() => typeof p === 'number' && setPage(p)}
               disabled={p === '...'}
-              className={`py-1 px-4 rounded-sm transition-all duration-300 text-xl font-bold font-family-primary ${
+              className={`py-1 px-4 rounded-sm transition-all duration-300 text-sm font-bold font-family-secondary ${
                 page === p
-                  ? 'bg-bg-light-primary text-font-primary shadow-md'
+                  ? 'bg-font-secondary text-bg-light-primary shadow-md'
                   : typeof p === 'number'
-                  ? 'bg-gray-200 text-black hover:bg-gray-300'
+                  ? 'bg-bg-primary text-black hover:bg-gray-300'
                   : 'bg-transparent text-black cursor-default'
               }`}
             >
@@ -233,7 +234,7 @@ export default function Bloglist() {
 
           <button
             onClick={() => page < totalPages && setPage(page + 1)}
-            disabled={page === totalPages}
+            hidden={page === totalPages}
             className="py-1 px-4 rounded-sm transition-all duration-300 bg-gray-200 text-black hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <GrLinkNext />

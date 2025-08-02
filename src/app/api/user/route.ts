@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
+import { profile } from 'console';
 
 export async function GET() {
   const cookieStore = await cookies();
@@ -15,8 +16,10 @@ export async function GET() {
     const user = jwt.verify(token, secret);
     if (typeof user === 'object' && user !== null) {
       return NextResponse.json({
+        id: (user as jwt.JwtPayload).id,
         name: (user as jwt.JwtPayload).name,
         email: (user as jwt.JwtPayload).email,
+        profileImage: (user as jwt.JwtPayload).profileImage || null,
       });
     } else {
       return NextResponse.json(

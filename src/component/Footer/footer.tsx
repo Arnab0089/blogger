@@ -11,7 +11,7 @@ import Link from 'next/link';
 
 export default function footer() {
   return (
-    <footer className="bg-[#0C1F2C] text-white px-4 py-8 text-sm w-full">
+    <footer className="bg-font-secondary text-bg-light-primary px-4 py-8 text-sm w-full">
       <div className="flex justify-center items-center gap-6 mb-6 border-t border-b border-gray-600 py-4">
         <Link
           href={'https://www.facebook.com/arnab.kundu.77398'}
@@ -52,7 +52,7 @@ export default function footer() {
 
       <div className="text-center mb-4">
         <h1 className="text-2xl font-bold">BlogBrand</h1>
-        <p className="text-gray-400 mt-1">
+        <p className="text-bg-light-primary mt-1">
           Copyright © {new Date().getFullYear()} BlogBrand, Inc.
         </p>
       </div>

@@ -1,5 +1,6 @@
 // app/admin/page.tsx
 import jwt from 'jsonwebtoken';
+import Dashboard from '@/component/AdminComponent/Dashboard/dashboard';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -19,6 +20,7 @@ export default async function AdminPage() {
   }
 
   const user = jwt.verify(token, secret) as { name: string };
+  console.log('User:', user);
   return (
     <>
       <div className="text-center w-full pt-10 text-font-secondary min-h-[100vh] bg-amber-500  z-20 overflow-hidden">
@@ -28,6 +30,10 @@ export default async function AdminPage() {
         <p className="mt-4 text-lg capitalize">
           Showcase your thoughts and ideas here.
         </p>
+
+        <div className="mt-8">
+          <Dashboard name={user.name} />
+        </div>
       </div>
     </>
   );

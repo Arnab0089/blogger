@@ -10,21 +10,21 @@ export default async function Header() {
   const linkHref = token ? '/admin' : '/login';
 
   return (
-    <div className="flex justify-between px-4 py-2 bg-gradient-to-r from-bg-primary to-bg-secondary text-black shadow-2xl rounded-b-2xl w-full">
+    <div className="flex justify-between px-4 py-2 bg-bg-light-primary shadow-2xs  w-full">
       <div className="flex items-center space-x-4">
         <Link href={'/'}>
           <Image
-            src={'/assest2/logo1.png'}
+            src={'/assest2/logo/logo5.png'}
             alt="Logo"
-            width={180}
-            height={60}
+            width={240}
+            height={40}
           />
         </Link>
       </div>
       <div className=" items-center space-x-4 hidden md:flex">
         <Link href={'/blog-list'}>
-          <button className="flex gap-2 font-family-primary border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer w-full ">
-            Blogs
+          <button className="flex gap-2 font-family-primary border-2 border-gray-300 rounded-lg px-4 py-2 bg-bg-light-primary text-font-secondary hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer w-full font-extrabold ">
+            <p className="font-extrabold text-black">Blogs</p>
             <Image
               src={'/assest2/blog.png'}
               alt="Blog"
@@ -34,8 +34,8 @@ export default async function Header() {
           </button>
         </Link>
         <Link href={'/about'}>
-          <button className="flex gap-2 font-family-primary border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer ">
-            About
+          <button className="flex gap-2 font-family-primary border-2 border-gray-300 rounded-lg px-4 py-2 bg-bg-light-primary text-font-secondary hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer font-extrabold">
+            <p className="text-black font-extrabold">About</p>
             <Image
               src={'/assest2/about.png'}
               alt="About"
@@ -45,14 +45,16 @@ export default async function Header() {
           </button>
         </Link>
         <Link href={'/contact'}>
-          <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer ">
-            Contact
+          <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-bg-light-primary text-font-secondary hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer font-extrabold font-family-primary">
+            <p className="text-black font-extrabold">Contact</p>
           </button>
         </Link>
       </div>
       <Link href={linkHref} className="flex items-center p-2">
-        <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-white text-black hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer ">
-          Get Started
+        <button className="border-2 border-gray-300 rounded-lg px-4 py-2 bg-bg-light-primary text-font-secondary hover:bg-gray-100 transition duration-300 shadow-[-7px_7px_0px] cursor-pointer font-family-primary">
+          <p className="text-black font-extrabold">
+            {token ? 'Dashboard' : 'Login'}
+          </p>
         </button>
       </Link>
     </div>

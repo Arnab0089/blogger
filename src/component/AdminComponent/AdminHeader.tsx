@@ -32,14 +32,14 @@ export default function AdminHeader() {
   return (
     <>
       <div className="relative z-50" ref={dropdownRef}>
-        <div className="flex items-center justify-between w-full py-2 px-6 border-b-2 border-font-primary bg-gradient-to-br from-bg-primary to-bg-secondary shadow-2xl rounded-br-2xl">
+        <div className="flex items-center justify-between w-full py-2 px-6 border-b-2 border-font-primary bg-bg-light-primary shadow-2xl rounded-br-2xl">
           <h3 className="font-semibold text-font-secondary text-xl lg:text-2xl">
             Blogging Panel
           </h3>
 
           <div
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="cursor-pointer rounded-full bg-font-secondary p-2 hover:bg-font-primary transition duration-300"
+            className="cursor-pointer rounded-full bg-font-secondary border-2 border-bg-secondary hover:bg-font-primary transition duration-300"
           >
             <UserAvatar />
           </div>

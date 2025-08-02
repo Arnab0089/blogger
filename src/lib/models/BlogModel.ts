@@ -29,6 +29,15 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  tags: {
+    type: String,
+    default: '',
+  },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   date: {
     type: Date,
     default: Date.now,

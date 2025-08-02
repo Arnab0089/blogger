@@ -10,19 +10,28 @@ export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
+  const [profileImageFile, setProfileImageFile] = useState<File | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('password', password);
+    if (profileImageFile) {
+      formData.append('profileImage', profileImageFile);
+    }
+
     const res = await fetch('/api/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ name, email, password }),
+      body: formData,
     });
 
     if (res.ok) {
@@ -35,32 +44,24 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="absolute z-10 top-5 left-[30%] sm:top-20 sm:left-20  ">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 relative">
+      <div className="absolute z-10 top-5 left-[30%] sm:top-20 sm:left-20">
         <Link href="/">
-          <div className="tag-banner-box">
-            <div className="tag-banner ">
-              <Image
-                src="/assest2/logo1.png"
-                alt="Logo"
-                width={180}
-                height={60}
-                className="hover:opacity-80 transition duration-300"
-              />
-            </div>
-          </div>
+          <Image src="/assest2/logo1.png" alt="Logo" width={180} height={60} />
         </Link>
       </div>
+
       <img
         src="/assest2/login.jpg"
-        alt="Login Image"
-        className="w-full h-full  rounded-lg shadow-md absolute top-0 left-0 object-cover opacity-90 "
+        alt="Login"
+        className="absolute inset-0 object-cover opacity-90 w-full h-full"
       />
+
       <form
         onSubmit={handleRegister}
-        className="bg-white p-8 rounded mx-6  w-full max-w-md z-12 bg-gradient-to-b from-rose-500 to-blue-300 backdrop-blur-md shadow-2xl"
+        className="relative z-20 bg-white p-8 rounded mx-6 w-full max-w-md shadow-2xl bg-gradient-to-b from-rose-500 to-blue-300 backdrop-blur-md"
       >
-        <h2 className="text-2xl font-bold mb-6 text-center text-blue-800 font-family-primary">
+        <h2 className="text-2xl font-bold mb-6 text-center text-blue-800">
           Register
         </h2>
 
@@ -78,7 +79,7 @@ export default function RegisterPage() {
         <input
           type="text"
           placeholder="Name"
-          className="w-full mb-4 p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+          className="w-full mb-4 p-2 border rounded"
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
@@ -87,16 +88,17 @@ export default function RegisterPage() {
         <input
           type="email"
           placeholder="Email"
-          className="w-full mb-4 p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+          className="w-full mb-4 p-2 border rounded"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+
         <div className="relative mb-4">
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
-            className="w-full mb-4 p-2 border rounded focus:outline-none focus:ring focus:border-blue-400"
+            className="w-full p-2 border rounded"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -104,15 +106,50 @@ export default function RegisterPage() {
           <button
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
-            className="absolute top-3 right-3 text-gray-600 hover:text-gray-800 text-xl"
-            tabIndex={-1}
+            className="absolute top-3 right-3 text-gray-600 hover:text-gray-800"
           >
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
+
+        {/* Optional Profile Image Upload */}
+        <label htmlFor="profileImage" className="block mb-2 font-semibold">
+          Profile Image (Optional)
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          id="profileImage"
+          className="mb-4 w-full p-2 border rounded"
+          onChange={(e) => {
+            if (e.target.files?.[0]) {
+              setProfileImageFile(e.target.files[0]);
+            }
+          }}
+        />
+
+        {profileImageFile && (
+          <div className="flex items-center justify-between mb-4">
+            <Image
+              src={URL.createObjectURL(profileImageFile)}
+              alt="Preview"
+              width={60}
+              height={60}
+              className="rounded-full object-cover"
+            />
+            <button
+              type="button"
+              onClick={() => setProfileImageFile(null)}
+              className="text-sm px-4 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
+            >
+              Remove
+            </button>
+          </div>
+        )}
+
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition cursor-pointer"
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
         >
           Register
         </button>

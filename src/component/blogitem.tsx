@@ -19,29 +19,29 @@ export default function BlogItem({
 }) {
   return (
     <div className="">
-      <div className="max-w-[330px] sm:max-w-[300px] h-full bg-white  border-black hover:shadow-[-7px_7px_0px] shadow-lg rounded-lg  transition-all duration-300 cursor-pointer">
+      <div className="max-w-[330px] sm:max-w-[300px] h-full bg-white border-2 text-font-secondary  border-font-secondary hover:shadow-[-7px_7px_0px] shadow-lg rounded-b-lg  transition-all duration-300 cursor-pointer">
         <Image
           src={image}
           alt="Blog image"
           layout="responsive"
           width={300}
           height={200}
-          className="border-b-2 border-black rounded-lg"
+          className="border-b-2 border-font-secondary rounded-b-lg mb-2"
         />
-        <span className="ml-5 mt-5 px-1 text-lg font-semibold bg-black text-white rounded-lg">
+        <span className="ml-5 px-2 py-1 text-lg font-semibold bg-font-secondary  text-bg-light-primary font-family-secondary tracking-widest rounded-lg ">
           {category}
         </span>
         <div className="p-5">
-          <h5 className="mb-2 text-2xl font-medium  tracking-tight text-gray-900 ">
+          <h5 className="mb-2 text-2xl  text-font-primary font-family-secondary tracking-wider text-left font-semibold  ">
             {title}
           </h5>
-          <p className="mb-3 text-sm tracking-tight text-gray-700">
+          <p className="mb-3 text-sm tracking-widest font-semibold text-black font-family-primary">
             {description.split(' ').slice(0, 25).join(' ')}
             {description.split(' ').length > 25 ? '...' : ''}
           </p>
           <Link
             href={`/blogs/${id}`}
-            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300 p-2 "
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-300 p-2 bg-bg-light-primary rounded-lg font-semibold font-family-secondary"
           >
             Read More{' '}
             <Image

@@ -2,34 +2,42 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { jwtDecode } from 'jwt-decode';
-import Cookies from 'js-cookie';
 
-interface DecodedToken {
+interface UserData {
   name: string;
   email: string;
   id: string;
+  profileImage?: string | null;
 }
 
 export default function UserAvatar({ size = 40 }: { size?: number }) {
   const [avatarSrc, setAvatarSrc] = useState<string>('/assest2/close.png'); // fallback
 
   useEffect(() => {
-    const token = Cookies.get('token');
-    if (!token) return;
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch('/api/user');
+        if (!res.ok) throw new Error('Unauthorized or error fetching user');
+        const data: UserData = await res.json();
 
-    try {
-      const decoded = jwtDecode<DecodedToken>(token);
-      const firstLetter = decoded.name?.[0]?.toUpperCase();
-
-      if (firstLetter && /^[A-Z]$/.test(firstLetter)) {
-        setAvatarSrc(`/assest2/Alphabet/${firstLetter}.png`);
-      } else {
+        // Try using profile image
+        if (data.profileImage) {
+          setAvatarSrc(data.profileImage);
+        } else {
+          const firstLetter = data.name?.[0]?.toUpperCase();
+          if (firstLetter && /^[A-Z]$/.test(firstLetter)) {
+            setAvatarSrc(`/assest2/Alphabet/${firstLetter}.png`);
+          } else {
+            setAvatarSrc(`/assest2/Alphabet/default.png`);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user avatar:', error);
         setAvatarSrc(`/assest2/Alphabet/default.png`);
       }
-    } catch (err) {
-      console.error('Token decode error:', err);
-    }
+    };
+
+    fetchUserData();
   }, []);
 
   return (
@@ -38,7 +46,7 @@ export default function UserAvatar({ size = 40 }: { size?: number }) {
       alt="User Avatar"
       width={size}
       height={size}
-      className="rounded-full object-cover"
+      className="rounded-full object-cover cursor-pointer"
     />
   );
 }

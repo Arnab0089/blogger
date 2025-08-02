@@ -20,7 +20,12 @@ export async function POST(req: NextRequest) {
     return new Response('JWT secret not configured', { status: 500 });
   }
   const token = jwt.sign(
-    { id: user._id, name: user.name, email: user.email },
+    {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      profileImage: user.profileImage,
+    },
     jwtSecret,
     {
       expiresIn: '1d',
@@ -28,6 +33,9 @@ export async function POST(req: NextRequest) {
   );
 
   return new Response(
-    JSON.stringify({ token, user: { name: user.name, email: user.email } }),
+    JSON.stringify({
+      token,
+      user: { name: user.name, email: user.email, id: user._id },
+    }),
   );
 }
