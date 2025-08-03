@@ -2,6 +2,7 @@ import Header from '@/component/Header';
 import HomeTab from '@/component/HomeTab/HomeTab';
 import RecentBlogs from '@/component/RecentHomebarBlogs/RecenetHomeBarBlogs';
 import Footer from '@/component/Footer/footer';
+import MobileNavMenu from '@/component/MobileNavMenuHomebar/MobileNavMenu';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <HomeTab />
       <RecentBlogs />
       <Footer />
+      <MobileNavMenu />
     </div>
   );
 }

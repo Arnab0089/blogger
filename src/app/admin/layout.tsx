@@ -13,7 +13,7 @@ const montserrat = Montserrat({
   weight: ['400', '500', '600', '700'],
 });
 
-export default function Layout({
+export default function AdminLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

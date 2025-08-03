@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import LoadingSpinner from '../Utitlity/LoadingSpinner';
 
 type Blog = {
   _id: string;

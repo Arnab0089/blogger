@@ -6,7 +6,7 @@ import PopularAuthors from '../popularAuthor/PopularAuthor';
 export default function HomeTab() {
   return (
     <div className="mt-8  px-4 sm:px-12 ">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="col-span-2 ">
           <div className="relative w-full h-[200px] mb-6">
             <motion.video
@@ -14,7 +14,7 @@ export default function HomeTab() {
               loop
               muted
               playsInline
-              className="w-full h-[200px] object-contain rounded-lg shadow-lg mb-6 opacity-10 "
+              className="w-full h-[200px] object-scale-down sm:object-cover rounded-lg shadow-lg mb-6 opacity-10 "
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: 'easeInOut' }}
@@ -35,7 +35,7 @@ export default function HomeTab() {
             <h2 className="text-2xl font-bold mb-6 font-family-secondary text-font-secondary tracking-wider">
               Welcome to Arnab's Blog
             </h2>
-            <p className="text-lg font-family-primary text-gray-700">
+            <p className="text-lg font-family-primary text-gray-700 font-display:swap">
               Discover the latest articles and insights from our community.
             </p>
           </motion.div>
