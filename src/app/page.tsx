@@ -1,15 +1,15 @@
 import Header from '@/component/Header';
 import HomeTab from '@/component/HomeTab/HomeTab';
-import RecentBlogs from '@/component/recentBlogs';
-import { motion } from 'motion/react';
-import { use } from 'react';
+import RecentBlogs from '@/component/RecentHomebarBlogs/RecenetHomeBarBlogs';
+import Footer from '@/component/Footer/footer';
 
 export default function Home() {
   return (
     <div className="">
       <Header />
       <HomeTab />
-      {/* <RecentBlogs /> */}
+      <RecentBlogs />
+      <Footer />
     </div>
   );
 }

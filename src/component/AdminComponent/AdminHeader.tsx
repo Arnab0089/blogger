@@ -56,8 +56,6 @@ export default function AdminHeader() {
           </div>
         )}
       </div>
-
-      {/* Mobile Sidebar Overlay */}
     </>
   );
 }

@@ -14,7 +14,7 @@ export default function HomeTab() {
               loop
               muted
               playsInline
-              className="w-full h-[200px] object-cover rounded-lg shadow-lg mb-6 opacity-10 "
+              className="w-full h-[200px] object-contain rounded-lg shadow-lg mb-6 opacity-10 "
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: 'easeInOut' }}
@@ -32,7 +32,7 @@ export default function HomeTab() {
             animate={{ opacity: 1, x: 0, scale: [1, 1.05, 1] }}
             transition={{ duration: 1, ease: 'linear' }}
           >
-            <h2 className="text-2xl font-bold mb-6 font-family-secondary text-bg-secondary tracking-wider">
+            <h2 className="text-2xl font-bold mb-6 font-family-secondary text-font-secondary tracking-wider">
               Welcome to Arnab's Blog
             </h2>
             <p className="text-lg font-family-primary text-gray-700">
@@ -40,7 +40,7 @@ export default function HomeTab() {
             </p>
           </motion.div>
         </div>
-        <div className="col-span-1 bg-gray-100 p-4 rounded-lg shadow-lg">
+        <div className="col-span-1  rounded-lg shadow-lg">
           <PopularAuthors />
         </div>
       </div>
