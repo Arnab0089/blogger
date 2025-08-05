@@ -32,7 +32,7 @@ export default function RecentHomeBarBlogs() {
 
   return (
     <>
-      {blogs.length > 0 && (
+      {blogs.length > 0 ? (
         <motion.div
           className="container mx-auto px-4 py-10"
           initial={{ opacity: 0, y: 20 }}
@@ -77,6 +77,13 @@ export default function RecentHomeBarBlogs() {
               ))}
           </div>
         </motion.div>
+      ) : (
+        <div>
+          <LoadingSpinner />
+          <p className="text-center text-gray-500 mt-4">
+            Loading recent blogs...
+          </p>
+        </div>
       )}
     </>
   );

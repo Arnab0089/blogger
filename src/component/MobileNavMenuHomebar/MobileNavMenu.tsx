@@ -17,7 +17,11 @@ export default function MobileNavMenu() {
     <>
       {isOpen && (
         <div className="fixed bottom-20 right-6 z-50 bg-bg-light-primary border shadow-lg rounded-xl p-4 w-40  flex flex-col gap-3 transition-all duration-300 lg:hidden justify-center items-center font-family-secondary text-lg">
-          <Link href="/blogs" onClick={closeMenu} className="hover:underline">
+          <Link
+            href="/blog-list"
+            onClick={closeMenu}
+            className="hover:underline"
+          >
             <p className="bg-bg-primary text-font-primary px-4 py-2 rounded-2xl flex items-center gap-2">
               Blogs
               <FaFeatherAlt className="text-black" />

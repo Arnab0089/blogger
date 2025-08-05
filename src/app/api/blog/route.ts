@@ -10,8 +10,6 @@ export async function GET(request: NextRequest) {
   await connectDB();
   const blogId = request.nextUrl.searchParams.get('id');
   const authorId = request.nextUrl.searchParams.get('userData');
-  console.log('Blog ID:', blogId);
-  console.log('Author ID:', authorId);
   if (authorId) {
     console.log(`Fetching blogs for author: ${authorId}`);
     const blogs = await BlogModel.find({ createdBy: authorId });

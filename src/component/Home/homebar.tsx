@@ -82,14 +82,16 @@ export default function home() {
                   className="tag-box my-4"
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 2.5, duration: 0.5, ease: 'easeInOut' }}
+                  transition={{ delay: 2.2, duration: 0.5, ease: 'easeInOut' }}
                 >
                   <div className="tag">
-                    <span>Introducing</span>
+                    <span className="font-family-secondary text-2xl">
+                      Introducing
+                    </span>
                   </div>
                 </motion.div>
                 <motion.h1
-                  className="text-5xl font-bold mb-4 mx-2 tracking-wide text-white"
+                  className="text-5xl font-bold mb-4 mx-2 tracking-wide text-font-secondary font-family-secondary"
                   initial={{ opacity: 0, y: -50 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.5, duration: 0.5, ease: 'easeInOut' }}

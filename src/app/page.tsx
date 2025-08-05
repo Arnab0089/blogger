@@ -6,11 +6,14 @@ import MobileNavMenu from '@/component/MobileNavMenuHomebar/MobileNavMenu';
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="relative min-h-screen">
       <Header />
       <HomeTab />
       <RecentBlogs />
-      <Footer />
+      <div className="">
+        <Footer />
+      </div>
+
       <MobileNavMenu />
     </div>
   );
